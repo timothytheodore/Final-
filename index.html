@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Website</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for header style -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .custom-navbar {
+            display: flex;
+            align-items: center;
+            background: #eceae3;
+            padding: 20px 40px;
+            font-family: 'Roboto', Arial, sans-serif;
+            box-sizing: border-box;
+            border-bottom: 1px solid #eee;
+        }
+
+        .navbar-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #222;
+            margin-right: 32px;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex: 1;
+        }
+
+        .navbar-links li {
+            margin: 0 18px;
+        }
+
+        .navbar-links a {
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #222;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: color 0.2s, border-bottom 0.2s;
+            border-bottom: 2.5px solid transparent;
+            padding-bottom: 2px;
+        }
+
+        .navbar-links a.active,
+        .navbar-links a:hover {
+            border-bottom: 2.5px solid #222;
+        }
+
+        .navbar-cta {
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #222;
+            background: #a4c8fa;
+            padding: 12px 32px;
+            border: 2px solid #222;
+            border-radius: 2px;
+            margin-left: 32px;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+            letter-spacing: 0.03em;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .navbar-cta:hover {
+            background: #90b4e6;
+            color: #222;
+        }
+
+        /* Hide hamburger for desktop header style */
+        .hamburger { 
+            display: none !important; 
+        }
+
+        /* ============= HERO SECTION WITH AUTOMATIC SLIDESHOW ============= */
+        
+        .hero {
+            position: relative;
+            height: 100vh; 
+            width: 100%; 
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Automatic Slideshow Backdrop */
+        .slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            animation: slideZoom 15s infinite;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .slide:nth-child(2) {
+            animation-delay: 5s;
+        }
+
+        .slide:nth-child(3) {
+            animation-delay: 10s;   
+        }
+
+        /* Zoom animation for slides */
+        @keyframes slideZoom {
+            0% { 
+                opacity: 0;
+                transform: scale(1.1);
+            }
+            6.66% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+            33.33% { 
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            40% { 
+                opacity: 0;
+                transform: scale(1.1);
+            }
+            100% { 
+                opacity: 0;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Hero overlay for better text readability */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.5) 0%,
+                rgba(0, 0, 0, 0.3) 50%,
+                rgba(0, 0, 0, 0.5) 100%
+            );
+            z-index: -1;
+        }
+
+        /* Hero Text Content */
+        .hero .container {
+            position: relative; 
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            animation: fadeInUp 1.5s ease-out 1s both;
+            letter-spacing: 0.02em;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            animation: fadeInUp 1.5s ease-out 1.3s both;
+            line-height: 1.6;
+        }
+
+        .hero .btn {
+            background: linear-gradient(135deg, #0066cc, #0052a3);
+            color: #fff;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.3rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+            animation: fadeInUp 1.5s ease-out 1.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .hero .btn:hover::before {
+            left: 100%;
+        }
+
+        .hero .btn:hover {
+            background: linear-gradient(135deg, #0052a3, #003d7a);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.5);
+        }
+
+        /* Automatic slideshow indicators */
+        .slideshow-progress {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 2;
+        }
+
+        .progress-indicator {
+            width: 60px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-indicator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 2px;
+            animation: progressBar 15s infinite;
+            width: 0;
+        }
+
+        .progress-indicator:nth-child(1)::before {
+            animation-delay: 0s;
+        }
+
+        .progress-indicator:nth-child(2)::before {
+            animation-delay: 5s;
+        }
+
+        .progress-indicator:nth-child(3)::before {
+            animation-delay: 10s;
+        }
+
+        @keyframes progressBar {
+            0% { width: 0; }
+            6.66% { width: 0; }
+            33.33% { width: 100%; }
+            40% { width: 100%; }
+            100% { width: 100%; }
+        }
+
+        /* Slide transitions */
+        .slide-transition {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating elements for visual interest */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        .floating-element:nth-child(4) {
+            left: 40%;
+            animation-delay: 6s;
+        }
+
+        .floating-element:nth-child(5) {
+            left: 50%;
+            animation-delay: 8s;
+        }
+
+        .floating-element:nth-child(6) {
+            left: 60%;
+            animation-delay: 10s;
+        }
+
+        .floating-element:nth-child(7) {
+            left: 70%;
+            animation-delay: 12s;
+        }
+
+        .floating-element:nth-child(8) {
+            left: 80%;
+            animation-delay: 14s;
+        }
+
+        .floating-element:nth-child(9) {
+            left: 90%;
+            animation-delay: 16s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* ============= ENHANCED FEATURES SECTION ============= */
+        
+        .features-section {
+            background: linear-gradient(135deg, #f9f5e3 0%, #f4f0e6 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(180deg, rgba(249, 245, 227, 0), rgba(249, 245, 227, 1));
+            z-index: 1;
+        }
+
+        .features-section::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            width: 110%;
+            height: 110%;
+            background: radial-gradient(circle, rgba(62, 124, 166, 0.04) 0%, transparent 70%);
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .features-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 1600px;
+            width: 92%;
+            margin: 0 auto;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ============= PROTOTYPE & APP TITLE ============= */
+        
+        .prototype-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3e7ca6, #5a9bd4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.12em;
+            text-align: center;
+            font-family: 'Roboto', Arial, sans-serif;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .prototype-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, #3e7ca6, #5a9bd4, transparent);
+            border-radius: 3px;
+            box-shadow: 0 3px 12px rgba(62, 124, 166, 0.4);
+        }
+
+        /* ============= ENHANCED MAIN CONTENT ============= */
+        
+        .features-main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .features-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2d2d2d, #3e7ca6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0 0 60px 0;
+            text-align: center;
+            position: relative;
+            line-height: 1.2;
+        }
+
+        .features-title::after {
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, #3e7ca6, #5a9bd4, transparent);
+            border-radius: 3px;
+            box-shadow: 0 4px 15px rgba(62, 124, 166, 0.4);
+        }
+
+        /* ============= COMBINED FEATURE CONTAINER ============= */
+        
+        .feature-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 30px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(62, 124, 166, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            padding: 60px;
+            margin-bottom: 80px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(62, 124, 166, 0.08);
+            width: 100%;
+            max-width: 1400px;
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .feature-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #3e7ca6, #5a9bd4, #7bb3e0);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .feature-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(62, 124, 166, 0.03), transparent);
+            transform: rotate(45deg);
+            transition: all 0.8s ease;
+            opacity: 0;
+        }
+
+        .feature-container:hover::after {
+            opacity: 1;
+            animation: shimmer 2.5s ease-in-out infinite;
+        }
+
+        .feature-container:hover {
+            transform: translateY(-15px) scale(1.01);
+            box-shadow: 
+                0 35px 70px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(62, 124, 166, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* ============= FEATURE CONTENT (TEXT SIDE) ============= */
+        
+        .feature-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-content-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #2d2d2d;
+            line-height: 1.3;
+            position: relative;
+        }
+
+        .feature-content-desc {
+            font-size: 1.4rem;
+            margin-bottom: 35px;
+            color: #555;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .feature-content-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 40px 0;
+        }
+
+        .feature-content-list li {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 45px;
+            color: #444;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .feature-content-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: #3e7ca6;
+            font-weight: bold;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #3e7ca6, #5a9bd4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(62, 124, 166, 0.2);
+        }
+
+        .feature-content-list li:hover {
+            color: #3e7ca6;
+            transform: translateX(8px);
+        }
+
+        .feature-content-list a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feature-content-list a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3e7ca6, #5a9bd4);
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .feature-content-list a:hover::after {
+            width: 100%;
+        }
+
+        .feature-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #3e7ca6, #5a9bd4);
+            color: #fff;
+            font-weight: 600;
+            padding: 20px 40px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            letter-spacing: 0.03em;
+            box-shadow: 
+                0 10px 30px rgba(62, 124, 166, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            align-self: flex-start;
+        }
+
+        .feature-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .feature-btn:hover::before {
+            left: 100%;
+        }
+
+        .feature-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 40px rgba(62, 124, 166, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, #2d5d80, #4a8bc2);
+        }
+
+        /* ============= FEATURE IMAGE SIDE ============= */
+        
+        .feature-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(62, 124, 166, 0.05) 0%, rgba(90, 155, 212, 0.03) 100%);
+            padding: 50px;
+            border-radius: 25px;
+            border: 1px solid rgba(62, 124, 166, 0.08);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(62, 124, 166, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .feature-image:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 25px 45px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .feature-photo {
+            width: 280px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.12));
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-photo:hover {
+            transform: scale(1.08) rotate(2deg);
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+        }
+
+        /* ============= ENHANCED DATA CARD ============= */
+        
+        .features-data-card {
+            background: linear-gradient(135deg, #3e7ca6 0%, #5a9bd4 50%, #7bb3e0 100%);
+            color: #fff;
+            border-radius: 35px;
+            box-shadow: 
+                0 30px 60px rgba(62, 124, 166, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            margin-top: 80px;
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            padding: 70px 60px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-data-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: rotate(45deg);
+            transition: all 1s ease;
+            opacity: 0;
+        }
+
+        .features-data-card:hover::before {
+            opacity: 1;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .features-data-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 40px 80px rgba(62, 124, 166, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .features-data-card h4 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 35px;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+        }
+
+        .features-data-content .data-label {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 18px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .features-data-content .data-source {
+            font-size: 1.3rem;
+            opacity: 0.85;
+            font-style: italic;
+        }
+
+        /* ============= ANIMATIONS ============= */
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(0%) translateY(0%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Enhanced scroll animations */
+        .prototype-title,
+        .features-title,
+        .feature-container,
+        .features-data-card {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .prototype-title {
+            animation-delay: 0.1s;
+        }
+
+        .features-title {
+            animation-delay: 0.3s;
+        }
+
+        .feature-container:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .feature-container:nth-child(5) {
+            animation-delay: 0.7s;
+        }
+
+        .feature-container:nth-child(7) {
+            animation-delay: 0.9s;
+        }
+
+        .features-data-card {
+            animation-delay: 1.1s;
+        }
+
+        /* ============= RESPONSIVE DESIGN ============= */
+        
+        @media (max-width: 1200px) {
+            .feature-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                max-width: 900px;
+                padding: 50px;
+            }
+
+            .features-title {
+                font-size: 3.8rem;
+            }
+
+            .prototype-title {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero p {
+                font-size: 1.4rem;
+            }
+
+            .hero .btn {
+                font-size: 1.1rem;
+                padding: 1rem 2rem;
+            }
+
+            .slideshow-progress {
+                bottom: 20px;
+            }
+
+            .progress-indicator {
+                width: 40px;
+                height: 3px;
+            }
+
+            .features-section {
+                padding: 80px 0;
+            }
+
+            .features-container {
+                width: 95%;
+            }
+
+            .prototype-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .features-title {
+                font-size: 3.2rem;
+                margin-bottom: 50px;
+            }
+
+            .feature-container {
+                padding: 40px 30px;
+                margin-bottom: 60px;
+            }
+
+            .feature-content-title {
+                font-size: 2.4rem;
+            }
+
+            .feature-image {
+                padding: 40px 30px;
+                min-height: 320px;
+            }
+
+            .feature-photo {
+                width: 220px;
+            }
+
+            .features-data-card {
+                padding: 50px 40px;
+                margin-top: 60px;
+            }
+
+            .features-data-card h4 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .custom-navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 18px 10px;
+            }
+
+            .navbar-logo {
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+            }
+
+            .navbar-links {
+                flex-wrap: wrap;
+            }
+
+            .navbar-cta {
+                margin-left: 0;
+                margin-top: 12px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .features-section {
+                padding: 60px 0;
+            }
+
+            .prototype-title {
+                font-size: 1.8rem;
+                margin-bottom: 35px;
+            }
+
+            .features-title {
+                font-size: 2.8rem;
+            }
+
+            .feature-content-title {
+                font-size: 2.2rem;
+            }
+
+            .features-data-card h4 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero .btn {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .progress-indicator {
+                width: 30px;
+                height: 2px;
+            }
+
+            .features-container {
+                width: 95%;
+                padding: 0 10px;
+            }
+
+            .prototype-title {
+                font-size: 1.6rem;
+                margin-bottom: 30px;
+            }
+
+            .prototype-title::after {
+                width: 150px;
+                height: 4px;
+            }
+
+            .feature-container {
+                padding: 30px 20px;
+                gap: 30px;
+            }
+
+            .feature-content-title {
+                font-size: 2rem;
+            }
+
+            .feature-image {
+                padding: 30px 20px;
+                min-height: 250px;
+            }
+
+            .feature-photo {
+                width: 180px;
+            }
+
+            .features-data-card {
+                padding: 40px 25px;
+            }
+
+            .features-data-card h4 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loading">
+        <div class="spinner"></div>
+        <span>Loading...</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="custom-navbar">
+            <div class="navbar-logo">
+                Research-HUB
+            </div>
+            <ul class="navbar-links">
+                <li><a href="index.html" class="active">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="#">RESEARCH METHODOLOGY</a></li>
+                <li><a href="prototype.html">PROTOTYPE &amp; APP</a></li>
+            </ul>
+            <a href="#features" class="navbar-cta">
+                Explore More &rarr;
+            </a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Automatic Slideshow Backdrop -->
+        <div class="slideshow">
+            <img src="EVAN.png" alt="Research Innovation" class="slide active">
+            <img src="THEO.jpeg" alt="Global Health Impact" class="slide">
+            <img src="c.jpg" alt="Technology & Innovation" class="slide">
+        </div>
+        
+        <!-- Floating elements for visual interest -->
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <!-- Text Content -->
+        <div class="container">
+            <h1>Welcome to Research-Hub</h1>
+            <p>Your gateway to groundbreaking academic and scientific research.</p>
+            <a href="#features" class="btn">Explore Research</a>
+        </div>
+        
+        <!-- Automatic progress indicators -->
+        <div class="slideshow-progress">
+            <div class="progress-indicator"></div>
+            <div class="progress-indicator"></div>
+            <div class="progress-indicator"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="features-container">
+            <!-- PROTOTYPE & APP Title -->
+            <h2 class="prototype-title">PROTOTYPE & APP</h2>
+
+            <!-- Main Content -->
+            <div class="features-main">
+                <!-- First Feature Block -->
+                <h2 class="features-title">Visi & Misi</h2>
+                <div class="feature-container">
+                    <div class="feature-content">
+                        <h3 class="feature-content-title">
+                            Innovative Research Excellence
+                        </h3>
+                        <p class="feature-content-desc">
+                            Pioneering breakthrough solutions in academic research with cutting-edge technology and comprehensive methodologies for sustainable impact.
+                        </p>
+                        <ul class="feature-content-list">
+                            <li>
+                                <a href="#" class="feature-link">
+                                    Advanced AI-powered research analytics and insights
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="feature-link">
+                                    Collaborative multi-institutional research platforms
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="feature-link">
+                                    Real-time data visualization and monitoring systems
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="#" class="feature-btn">CARA KERJA &rarr;</a>
+                    </div>
+                    
+                    <div class="feature-image">
+                        <img src="phone-cardio-pop.png" alt="CardioPop on Phone" class="feature-photo" />
+                    </div>
+                </div>
+
+                <!-- Second Feature Block -->
+                <h2 class="features-title">Teknologi Terdepan</h2>
+                <div class="feature-container">
+                    <div class="feature-content">
+                        <h3 class="feature-content-title">
+                            Smart Health Monitoring
+                        </h3>
+                        <p class="feature-content-desc">
+                            Revolutionary health technology that transforms how we monitor, analyze, and predict cardiovascular health with precision and accessibility.
+                        </p>
+                        <ul class="feature-content-list">
+                            <li>
+                                <a href="#" class="feature-link">
+                                    Machine learning-based health prediction models
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="feature-link">
+                                    IoT-enabled continuous monitoring devices
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="feature-link">
+                                    Cloud-based health analytics and reporting
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="#" class="feature-btn">CARA KERJA &rarr;</a>
+                    </div>
+                    
+                    <div class="feature-image">
+                        <img src="phone-cardio-pop.png" alt="CardioPop on Phone" class="feature-photo" />
+                    </div>
+                </div>
+
+                <!-- Third Feature Block -->
+                <h2 class="features-title">Impact & Innovation</h2>
+                <div class="feature-container">
+                    <div class="feature-content">
+                        <h3 class="feature-content-title">
+                            Global Health Impact
+                        </h3>
+                        <p class="feature-content-desc">
+                            Creating measurable impact on global health outcomes through evidence-based research, community engagement, and policy influence.
+                        </p>
+                        <ul class="feature-content-list">
+                            <li>
+                                <a href="#" class="feature-link">
+                                    Evidence-based healthcare policy recommendations
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="feature-link">
+                                    Community health education and awareness programs
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="feature-link">
+                                    International research collaboration networks
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="#" class="feature-btn">CARA KERJA &rarr;</a>
+                    </div>
+                    
+                    <div class="feature-image">
+                        <img src="phone-cardio-pop.png" alt="CardioPop on Phone" class="feature-photo" />
+                    </div>
+                </div>
+
+                <!-- Data Card -->
+                <div class="features-data-card">
+                    <h4>Advancing Global Health Through Research Excellence</h4>
+                    <div class="features-data-content">
+                        <div class="data-label">
+                            Empowering healthcare innovation with data-driven insights and collaborative research platforms
+                        </div>
+                        <div class="data-source">
+                            Building bridges between research, technology, and real-world health solutions
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <p class="faq-subtitle">Find answers to common questions about our research and products</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" data-faq="1">
+                        <span>What makes Research-HUB unique in the academic landscape?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-1">
+                        <p>Research-HUB combines cutting-edge AI technology with collaborative research methodologies, providing researchers with unprecedented tools for data analysis, peer collaboration, and real-world impact measurement. Our platform bridges the gap between academic research and practical application.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" data-faq="2">
+                        <span>How does the health monitoring technology work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-2">
+                        <p>Our health monitoring system uses advanced IoT sensors, machine learning algorithms, and cloud-based analytics to provide continuous, non-invasive health monitoring. The technology can predict potential health issues before they become critical, enabling preventive care.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" data-faq="3">
+                        <span>What security measures protect research data?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-3">
+                        <p>We implement enterprise-grade encryption, multi-factor authentication, blockchain-based data integrity, and comply with international data protection regulations including GDPR, HIPAA, and institutional review board requirements.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" data-faq="4">
+                        <span>How can institutions integrate with our platform?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-4">
+                        <p>Our platform offers flexible API integration, supports standard academic protocols, and provides comprehensive migration tools to seamlessly connect with existing institutional systems, learning management systems, and research databases.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" data-faq="5">
+                        <span>What support is available for researchers?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-5">
+                        <p>We provide comprehensive onboarding programs, interactive tutorials, live training sessions, dedicated research support teams, extensive documentation, and a collaborative community forum for peer-to-peer learning and support.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" data-faq="6">
+                        <span>How do you measure research impact?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-6">
+                        <p>Our advanced analytics track citation metrics, collaboration networks, policy influence, media coverage, patent applications, and real-world application outcomes to provide comprehensive impact assessment and transparent reporting.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" data-faq="7">
+                        <span>What funding opportunities are available?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-7">
+                        <p>The platform includes grant discovery tools, proposal collaboration features, budget tracking, compliance monitoring, automated reporting, and connections to international funding bodies and research foundations.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" data-faq="8">
+                        <span>How often are new features released?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-8">
+                        <p>We release quarterly feature updates based on user feedback and emerging research needs, with monthly security patches and performance improvements deployed continuously through our agile development process.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="a-footer">
+        <div class="footer-container">
+            <!-- Contact Info & Social Only -->
+            <div class="footer-col contact-info">
+                <img src="unpar-logo.png" alt="Universitas Katolik Parahyangan Logo" class="footer-logo" />
+                <div class="contact-details">
+                    <div>
+                        <span class="footer-icon">&#128205;</span> 
+                        Jln. Ciumbuleuit No. 94 Bandung 40142 Jawa Barat
+                    </div>
+                    <div>
+                        <span class="footer-icon">&#128222;</span> 
+                        (022) 2032 655; (022) 2034 444
+                    </div>
+                    <div>
+                        <span class="footer-icon">&#9993;</span> 
+                        research@unpar.ac.id
+                    </div>
+                    <div>
+                        <span class="footer-icon">&#128241;</span> 
+                        +62 858-8214-1955
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Loading screen
+        window.addEventListener("load", function() {
+            var loadingDiv = document.getElementById("loading");
+            if (loadingDiv) {
+                loadingDiv.style.opacity = "0";
+                setTimeout(() => {
+                    loadingDiv.style.display = "none";
+                }, 500);
+            }
+        });
+
+        // Enhanced FAQ Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqId = this.getAttribute('data-faq');
+                    const answer = document.getElementById(`faq-${faqId}`);
+                    const icon = this.querySelector('.faq-icon');
+                    const isOpen = answer.classList.contains('active');
+                    
+                    // Close all other FAQ items
+                    document.querySelectorAll('.faq-answer').forEach(ans => {
+                        ans.classList.remove('active');
+                    });
+                    document.querySelectorAll('.faq-icon').forEach(ic => {
+                        ic.textContent = '+';
+                    });
+                    document.querySelectorAll('.faq-question').forEach(q => {
+                        q.classList.remove('active');
+                    });
+                    
+                    // Toggle current FAQ item
+                    if (!isOpen) {
+                        answer.classList.add('active');
+                        icon.textContent = '×';
+                        this.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
