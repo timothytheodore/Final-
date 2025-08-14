@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    background: #F5F5DC;
+    background: linear-gradient(to right, #f9f5e3, #F5F5DC, #eceae3);
 }
 
 /* ============================================
@@ -20,7 +20,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: #F5F5DC; /* Beige background */
+    background: linear-gradient(to right, #f9f5e3, #F5F5DC, #eceae3); /* Gradient background to match body */
     display: flex;
     flex-direction: column;
     justify-content: center;
